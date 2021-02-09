@@ -1,3 +1,5 @@
+import 'package:estructura_practica_1/registro_y_login/login.dart';
+import 'package:estructura_practica_1/registro_y_login/registro.dart';
 import 'package:estructura_practica_1/registro_y_login/registro_login.dart';
 import 'package:estructura_practica_1/splash.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
         "/": (context) => Splash(),
         "/home": (context) => Home(title: 'Title'),
         "/registroLogin": (context) => Registro_Login(),
+        "/login": (context) => Login(),
+        "/registro": (context) => Registro(),
       },
     );
   }

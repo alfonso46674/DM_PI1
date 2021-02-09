@@ -29,11 +29,28 @@ flutter_icons:
   image_path: "assets/images/app_icon.png"
 
 flutter:
+  fonts:
+      - family: OpenSans
+        fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Light.ttf
+
+      - family: Akzidens-Grotesk
+        fonts:
+        - asset: assets/fonts/AkzidenzGrotesk-Medium.otf
+        - asset: assets/fonts/AkzidenzGrotesk-MediumItalic.otf
+          style: italic
+
+
   uses-material-design: true
 
   assets:
     - assets/images/
   #   - images/a_dot_ham.jpeg
+
+  
+      # -asset: assets/fonts/Akzidens-Grotesk-MediumItalic.otf
+      # style: Italic
 
   # fonts:
   #   - family: Schyler
