@@ -1,6 +1,10 @@
+import 'package:estructura_practica_1/registro_y_login/registro_login.dart';
+import 'package:estructura_practica_1/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/home/home.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
+
+import 'home/home.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +17,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: PRIMARY_COLOR,
       ),
-      home: Home(title: APP_TITLE),
+      initialRoute: '/',
+      routes: {
+        "/": (context) => Splash(),
+        "/home": (context) => Home(title: 'Title'),
+        "/registroLogin": (context) => Registro_Login(),
+      },
     );
   }
 }
