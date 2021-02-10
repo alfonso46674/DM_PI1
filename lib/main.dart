@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       title: APP_TITLE,
       theme: ThemeData(
         primarySwatch: PRIMARY_COLOR,
+        toggleableActiveColor: Colors.grey,
       ),
       initialRoute: '/',
       routes: {

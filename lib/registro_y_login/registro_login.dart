@@ -63,9 +63,8 @@ class _Registro_LoginState extends State<Registro_Login> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: MediaQuery.of(context)
-                        .size
-                        .width * 0.95, // para que abarque todo el ancho de la pantalla
+                    width: MediaQuery.of(context).size.width *
+                        0.95, // para que abarque todo el ancho de la pantalla
                     child: MaterialButton(
                       child: Text(
                         "INGRESA",
