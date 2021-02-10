@@ -16,6 +16,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        centerTitle: true,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.person),
@@ -36,23 +37,24 @@ class _HomeState extends State<Home> {
         children: <Widget>[
           GestureDetector(
             onTap: _openHotDrinksPage,
-            child: ItemHome(
+            child:
+             ItemHome(
               title: "Bebidas calientes",
-              image: "https://i.imgur.com/XJ0y9qs.png",
+              image: "assets/images/hotDrinks.png",
             ),
           ),
           ItemHome(
             title: "Postres",
-            image: "https://i.imgur.com/fI7Tezv.png",
+            image: "assets/images/postres.png",
           ),
           ItemHome(
             title: "Granos",
-            image: "https://i.imgur.com/5MZocC1.png",
+            image: "assets/images/granos.png",
           ),
           ItemHome(
             // TODO: Al hacer clic, que muestre un snackbar de "Proximamente"
             title: "Tazas",
-            image: "https://i.imgur.com/fMjtSpy.png",
+            image: "assets/images/comingSoon.png",
           ),
         ],
       ),

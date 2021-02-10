@@ -12,41 +12,38 @@ class ItemHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 220,
+      height: 200,
       child: Stack(
         children: [
-          Positioned.fill(
-            top: 16,
-            child: Card(
-              elevation: 4.0,
-              margin: EdgeInsets.all(24.0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              color: Colors.indigo,
-              child: Container(height: 180),
-            ),
-          ),
+          // Positioned.fill(
+          //   top: 16,
+          //   child: Card(
+          //     elevation: 4.0,
+          //     margin: EdgeInsets.all(24.0),
+          //     shape: RoundedRectangleBorder(
+          //       borderRadius: BorderRadius.circular(30),
+          //     ),
+          //     color: Colors.indigo,
+          //     child: Container(height: 180),
+          //   ),
+          // ),
           Container(
             height: 160,
-            margin: EdgeInsets.only(top: 28, bottom: 24, left: 24, right: 24),
+            margin: EdgeInsets.only(top: 20, bottom: 20, left: 24, right: 24),
             decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
-              ),
+              color: Color.fromARGB(170, 0x8B, 0x81, 0x75),
             ),
             child: Row(
               children: [
                 Container(
-                  margin: EdgeInsets.only(left: 16),
                   width: 160,
-                  decoration: BoxDecoration(
-                    color: Colors.yellow[300],
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(30),
-                    ),
-                  ),
+                  // margin: EdgeInsets.only(left: 16),
+                  // decoration: BoxDecoration(
+                  //   color: Colors.yellow[300],
+                  //   borderRadius: BorderRadius.all(
+                  //     Radius.circular(30),
+                  //   ),
+                  // ),
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),
                     child: Text(
@@ -69,12 +66,18 @@ class ItemHome extends StatelessWidget {
                 topRight: Radius.circular(5.0),
                 bottomRight: Radius.circular(5.0),
               ),
-              child: Image.network(
+              child: Image.asset(
                 "$image",
                 fit: BoxFit.contain,
                 height: 180,
                 width: 180,
               ),
+              // child: Image.network(
+              //   "$image",
+              //   fit: BoxFit.contain,
+              //   height: 180,
+              //   width: 180,
+              // ),
             ),
           ),
         ],

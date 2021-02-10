@@ -19,11 +19,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: PRIMARY_COLOR,
         toggleableActiveColor: Colors.grey,
+        buttonColor: Colors.grey,
+        
       ),
       initialRoute: '/',
       routes: {
         "/": (context) => Splash(),
-        "/home": (context) => Home(title: 'Title'),
+        "/home": (context) => Home(title: 'Inicio'),
         "/registroLogin": (context) => Registro_Login(),
         "/login": (context) => Login(),
         "/registro": (context) => Registro(),
