@@ -114,7 +114,11 @@ class _LoginState extends State<Login> {
               Container(
                 width: MediaQuery.of(context).size.width *
                     0.95, // para que abarque casi todo el ancho de la pantalla
+
                 child: MaterialButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                   child: Text("ENTRAR"),
                   color: Colors.grey,
                   onPressed: () {
@@ -147,6 +151,9 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   MaterialButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                     child: Text(
                       "REGISTRATE",
                       style: TextStyle(

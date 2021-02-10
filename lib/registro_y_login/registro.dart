@@ -150,6 +150,7 @@ class _RegistroState extends State<Registro> {
                   ),
                 ),
                 value: _checkedListTile,
+                controlAffinity: ListTileControlAffinity.leading,
                 onChanged: (bool value){
                   setState((){
                     _checkedListTile = value;
@@ -166,6 +167,9 @@ class _RegistroState extends State<Registro> {
                 width: MediaQuery.of(context).size.width *
                     0.95, // para que abarque casi todo el ancho de la pantalla
                 child: MaterialButton(
+                  shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                   child: Text("REGISTRATE"),
                   color: Colors.grey,
                   onPressed: () {

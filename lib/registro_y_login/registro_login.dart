@@ -45,6 +45,9 @@ class _Registro_LoginState extends State<Registro_Login> {
                         0.95, // para que abarque casi todo el ancho de la pantalla
                     child: MaterialButton(
                       child: Text("REGISTRATE"),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       color: Colors.grey,
                       onPressed: () {
                         Navigator.pushNamed(context, '/registro');
@@ -66,6 +69,9 @@ class _Registro_LoginState extends State<Registro_Login> {
                     width: MediaQuery.of(context).size.width *
                         0.95, // para que abarque todo el ancho de la pantalla
                     child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       child: Text(
                         "INGRESA",
                         style: TextStyle(
