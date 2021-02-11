@@ -42,9 +42,12 @@ class _HomeState extends State<Home> {
               image: "assets/images/hotDrinks.png",
             ),
           ),
-          ItemHome(
-            title: "Postres",
-            image: "assets/images/postres.png",
+          GestureDetector(
+            onTap: _openDessertPage,
+                      child: ItemHome(
+              title: "Postres",
+              image: "assets/images/postres.png",
+            ),
           ),
           GestureDetector(
             onTap: _openGrainsPage,
@@ -74,8 +77,6 @@ class _HomeState extends State<Home> {
   }
 
   void _openDessertPage() {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => null),
-    );
+    Navigator.of(context).pushNamed('/postres');
   }
 }

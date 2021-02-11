@@ -1,3 +1,4 @@
+import 'package:estructura_practica_1/models/product_dessert.dart';
 import 'package:estructura_practica_1/models/product_hot_drinks.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
 
@@ -6,12 +7,53 @@ enum ProductType { BEBIDAS, GRANO, POSTRES }
 class ProductRepository {
   static List<dynamic> loadProducts(ProductType prodType) {
     // ----------------------              ----------------------------//
-    // ----------------------       Tazas      ----------------------------//
+    // ----------------------       Postres      ----------------------------//
     // ----------------------              ----------------------------//
 
-    //if (prodType == ProductType.POSTRES) {
-    // TODO: Agregar al menos 5 productos "postres"
-    //}
+    if (prodType == ProductType.POSTRES) {
+      return <ProductDesserts>[
+        ProductDesserts(
+          productTitle: "Donas",
+          productDescription:
+              "Paquete de 3 donas de chocolate, fresa y vainilla.",
+          productImage: "assets/images/donas.png",
+          productSize: ProductSizeDessert.CH,
+          productAmount: 0,
+        ),
+        ProductDesserts(
+          productTitle: "Crepas",
+          productDescription: "Paquete de 3 crepas con crema y fresas.",
+          productImage: "assets/images/crepas.png",
+          productSize: ProductSizeDessert.M,
+          productAmount: 0,
+        ),
+        ProductDesserts(
+          productTitle: "Nieve de chocolate",
+          productDescription:
+              "Nieve de chocolate acompañada con galletas oreo.",
+          productImage: "assets/images/nieveOreo.png",
+          productSize: ProductSizeDessert.M,
+          productAmount: 0,
+        ),
+        ProductDesserts(
+          productTitle: "Muffin de fresa",
+          productDescription:
+              "Muffin pequeño de fresa y crema chantillin.",
+          productImage: "assets/images/muffinFresa.png",
+          productSize: ProductSizeDessert.CH,
+          productAmount: 0,
+        ),
+        ProductDesserts(
+          productTitle: "Muffin de platano",
+          productDescription:
+              "Muffin pequeño de platano con crema chantillin.",
+          productImage: "assets/images/muffinPlatano.png",
+          productSize: ProductSizeDessert.CH,
+          productAmount: 0,
+        ),
+        
+      ];
+    }
 
     // ----------------------              ----------------------------//
     // ----------------------       Granos      ----------------------------//
