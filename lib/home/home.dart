@@ -37,8 +37,7 @@ class _HomeState extends State<Home> {
         children: <Widget>[
           GestureDetector(
             onTap: _openHotDrinksPage,
-            child:
-             ItemHome(
+            child: ItemHome(
               title: "Bebidas",
               image: "assets/images/hotDrinks.png",
             ),
@@ -47,9 +46,12 @@ class _HomeState extends State<Home> {
             title: "Postres",
             image: "assets/images/postres.png",
           ),
-          ItemHome(
-            title: "Café de grano",
-            image: "assets/images/granos.png",
+          GestureDetector(
+            onTap: _openGrainsPage,
+            child: ItemHome(
+              title: "Café de grano",
+              image: "assets/images/granos.png",
+            ),
           ),
           ItemHome(
             // TODO: Al hacer clic, que muestre un snackbar de "Proximamente"
@@ -68,9 +70,7 @@ class _HomeState extends State<Home> {
   }
 
   void _openGrainsPage() {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => null),
-    );
+    Navigator.of(context).pushNamed('/granos');
   }
 
   void _openDessertPage() {

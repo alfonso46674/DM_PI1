@@ -1,4 +1,5 @@
 import 'package:estructura_practica_1/drinks/hot_drinks_page.dart';
+import 'package:estructura_practica_1/grains/grains_page.dart';
 import 'package:estructura_practica_1/models/product_repository.dart';
 import 'package:estructura_practica_1/registro_y_login/login.dart';
 import 'package:estructura_practica_1/registro_y_login/registro.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         "/login": (context) => Login(),
         "/registro": (context) => Registro(),
         "/bebidas": (context) => HotDrinksPage(drinksList: ProductRepository.loadProducts(ProductType.BEBIDAS)),
+        "/granos": (context) => GrainsPage(grainsList: ProductRepository.loadProducts(ProductType.GRANO)),
       },
     );
   }
