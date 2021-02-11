@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
             onTap: _openHotDrinksPage,
             child:
              ItemHome(
-              title: "Bebidas calientes",
+              title: "Bebidas",
               image: "assets/images/hotDrinks.png",
             ),
           ),
@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
             image: "assets/images/postres.png",
           ),
           ItemHome(
-            title: "Granos",
+            title: "Café de grano",
             image: "assets/images/granos.png",
           ),
           ItemHome(
@@ -64,13 +64,7 @@ class _HomeState extends State<Home> {
   void _openHotDrinksPage() {
     // TODO: completar en navigator pasando los parametros a la pagina de HotDrinksPage
 
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) {
-          return null;
-        },
-      ),
-    );
+    Navigator.of(context).pushNamed('/bebidas');
   }
 
   void _openGrainsPage() {
