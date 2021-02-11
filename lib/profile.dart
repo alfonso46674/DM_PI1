@@ -80,7 +80,9 @@ class Profile extends StatelessWidget {
                   Expanded(
                     child: RaisedButton(
                       child: Text(PROFILE_LOGOUT),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/registroLogin');
+                      },
                     ),
                   ),
                 ],
