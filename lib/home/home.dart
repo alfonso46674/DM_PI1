@@ -4,6 +4,7 @@ import 'package:estructura_practica_1/profile.dart';
 
 class Home extends StatefulWidget {
   final String title;
+
   Home({Key key, this.title}) : super(key: key);
 
   @override
@@ -11,9 +12,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text(widget.title),
         centerTitle: true,
@@ -44,7 +48,7 @@ class _HomeState extends State<Home> {
           ),
           GestureDetector(
             onTap: _openDessertPage,
-                      child: ItemHome(
+            child: ItemHome(
               title: "Postres",
               image: "assets/images/postres.png",
             ),
@@ -56,10 +60,12 @@ class _HomeState extends State<Home> {
               image: "assets/images/granos.png",
             ),
           ),
-          ItemHome(
-            // TODO: Al hacer clic, que muestre un snackbar de "Proximamente"
-            title: "Tazas",
-            image: "assets/images/comingSoon.png",
+          GestureDetector(
+            onTap: _showSnackBarMugs,
+            child: ItemHome(
+              title: "Tazas",
+              image: "assets/images/comingSoon.png",
+            ),
           ),
         ],
       ),
@@ -67,8 +73,6 @@ class _HomeState extends State<Home> {
   }
 
   void _openHotDrinksPage() {
-    // TODO: completar en navigator pasando los parametros a la pagina de HotDrinksPage
-
     Navigator.of(context).pushNamed('/bebidas');
   }
 
@@ -78,5 +82,14 @@ class _HomeState extends State<Home> {
 
   void _openDessertPage() {
     Navigator.of(context).pushNamed('/postres');
+  }
+
+  void _showSnackBarMugs(){
+    _scaffoldKey.currentState.hideCurrentSnackBar();
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: Text("¡Proximamente!")
+      )
+    );
   }
 }
