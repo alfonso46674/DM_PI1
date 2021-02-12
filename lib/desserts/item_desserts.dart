@@ -80,7 +80,7 @@ class _ItemDessertsState extends State<ItemDesserts> {
                         topRight: Radius.circular(5.0),
                         bottomRight: Radius.circular(5.0),
                       ),
-                      child: Image.asset(
+                      child: Image.network(
                         "${widget.dessert.productImage}",
                         fit: BoxFit.contain,
                         height: 180,

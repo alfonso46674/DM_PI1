@@ -64,7 +64,7 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
                               },
                             ),
                           ),
-                          Image.asset(
+                          Image.network(
                             "${dessert.productImage}",
                             width: 180,
                             height: 180,

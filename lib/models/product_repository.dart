@@ -16,14 +16,14 @@ class ProductRepository {
           productTitle: "Donas",
           productDescription:
               "Paquete de 3 donas de chocolate, fresa y vainilla.",
-          productImage: "assets/images/donas.png",
+          productImage: "https://st.depositphotos.com/1007298/2525/i/600/depositphotos_25259415-stock-photo-various-donuts.jpg",
           productSize: ProductSizeDessert.CH,
           productAmount: 0,
         ),
         ProductDesserts(
           productTitle: "Crepas",
           productDescription: "Paquete de 3 crepas con crema y fresas.",
-          productImage: "assets/images/crepas.png",
+          productImage: "https://lh3.googleusercontent.com/proxy/S3prWmo4GZo5WFTOmRNthappbkuspo10XLmuRH-yguLZtg0gBe3Ok1wWSE3KjPcDg9ZhZ0E41qSgxCKExxFZxWhDseZsf_ZTfjIQ0KLOaJRsaXFkL_KUUoiM0DyZ5buyvBBkDg",
           productSize: ProductSizeDessert.M,
           productAmount: 0,
         ),
@@ -31,7 +31,7 @@ class ProductRepository {
           productTitle: "Nieve de chocolate",
           productDescription:
               "Nieve de chocolate acompañada con galletas oreo.",
-          productImage: "assets/images/nieveOreo.png",
+          productImage: "https://www.cocinayvino.com/wp-content/uploads/2016/10/36268119_xxl-e1475434570833.jpg",
           productSize: ProductSizeDessert.M,
           productAmount: 0,
         ),
@@ -39,7 +39,7 @@ class ProductRepository {
           productTitle: "Muffin de fresa",
           productDescription:
               "Muffin pequeño de fresa y crema chantillin.",
-          productImage: "assets/images/muffinFresa.png",
+          productImage: "https://images-gmi-pmc.edge-generalmills.com/488e5752-b7e0-4147-ba0a-5244c71fc07d.jpg",
           productSize: ProductSizeDessert.CH,
           productAmount: 0,
         ),
@@ -47,7 +47,7 @@ class ProductRepository {
           productTitle: "Muffin de platano",
           productDescription:
               "Muffin pequeño de platano con crema chantillin.",
-          productImage: "assets/images/muffinPlatano.png",
+          productImage: "https://estaticos.marie-claire.es/media/cache/680x_thumb/uploads/images/recipe/56c6eb6b5bafe84d6fb39ea3/interior-muffins.jpg",
           productSize: ProductSizeDessert.CH,
           productAmount: 0,
         ),
