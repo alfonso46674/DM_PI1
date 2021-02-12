@@ -37,9 +37,6 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
   ];
   @override
   Widget build(BuildContext context) {
-    // ProductHotDrinks drink = ModalRoute.of(context).settings.arguments;
-    //Instancia del carrito
-    // ProductCart cart = new ProductCart();
 
     return Scaffold(
         appBar: AppBar(
@@ -277,6 +274,7 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                                     backgroundColor: Colors.orange,
                                   ),
                                 );
+                                break;
                               }
                               //Si el elemento no esta en el carrito se agrega
                               else {
@@ -302,6 +300,7 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                                     backgroundColor: Colors.orange,
                                   ),
                                 );
+                                break;
                               }
                             }
                           }
