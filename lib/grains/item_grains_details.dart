@@ -1,8 +1,18 @@
+import 'package:enum_to_string/enum_to_string.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
+import 'package:estructura_practica_1/models/product_item_cart.dart';
+import 'package:estructura_practica_1/models/product_repository.dart';
 import 'package:flutter/material.dart';
 
 class ItemGrainsDetails extends StatefulWidget {
-  ItemGrainsDetails({Key key}) : super(key: key);
+  final ProductCart cart;
+  final ProductGrains grain;
+  ItemGrainsDetails({
+    Key key,
+    @required this.cart,
+    @required this.grain,
+  }) : super(key: key);
 
   @override
   _ItemGrainsDetailsState createState() => _ItemGrainsDetailsState();
@@ -18,15 +28,14 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
 //Arreglo de objetos que tendra la informacion de los botones. Se relaciona con el arreglo anterior
 //El key del arreglo anterior se usa para encontrar la posicion del boton a buscar en este areglo de objetos
   var _buttonList = [
-    {"id": 0, "name": "CUARTO", "state": false, "acronym": "CUARTO"},
+    {"id": 0, "name": "CUARTO", "state": true, "acronym": "CUARTO"},
     {"id": 1, "name": "KILO", "state": false, "acronym": "KILO"},
   ];
   @override
   Widget build(BuildContext context) {
-    ProductGrains grain = ModalRoute.of(context).settings.arguments;
     return Scaffold(
         appBar: AppBar(
-          title: Text("${grain.productTitle}"),
+          title: Text("${widget.grain.productTitle}"),
           centerTitle: true,
         ),
         body: Padding(
@@ -54,17 +63,17 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                           Align(
                             alignment: Alignment.topRight,
                             child: IconButton(
-                              icon: grain.liked
+                              icon: widget.grain.liked
                                   ? Icon(Icons.favorite)
                                   : Icon(Icons.favorite_border_outlined),
                               onPressed: () {
-                                grain.liked = !grain.liked;
+                                widget.grain.liked = !widget.grain.liked;
                                 setState(() {});
                               },
                             ),
                           ),
                           Image.network(
-                            "${grain.productImage}",
+                            "${widget.grain.productImage}",
                             width: 180,
                             height: 180,
                           ),
@@ -80,7 +89,7 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
               Row(
                 children: [
                   Text(
-                    "${grain.productTitle}",
+                    "${widget.grain.productTitle}",
                     style: TextStyle(
                         fontSize: 24.0, fontFamily: "Akzidens-Grotesk"),
                   ),
@@ -94,7 +103,7 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                   Container(
                     child: Flexible(
                       child: Text(
-                        "${grain.productDescription}",
+                        "${widget.grain.productDescription}",
                         style:
                             TextStyle(fontSize: 20.0, fontFamily: 'OpenSans'),
                       ),
@@ -118,8 +127,7 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                   ),
                   Container(
                     child: Text(
-                      "\$${grain.productPrice}",
-
+                      "\$${widget.grain.productPrice}",
                       style: TextStyle(fontSize: 28.0),
                     ),
                   ),
@@ -176,19 +184,21 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                                 //Actualizar el tamaño del producto
                                 switch (_buttonList[buttonMap.key]["acronym"]) {
                                   case "CUARTO":
-                                    grain.productWeight = ProductWeight.CUARTO;
+                                    widget.grain.productWeight =
+                                        ProductWeight.CUARTO;
                                     break;
 
                                   case "KILO":
-                                    grain.productWeight = ProductWeight.CUARTO;
+                                    widget.grain.productWeight =
+                                        ProductWeight.CUARTO;
                                     break;
 
                                   default:
                                 }
 
                                 //Actualizar precio en base del tamaño del producto
-                                grain.productPrice = grain.productPriceCalculator();
-
+                                widget.grain.productPrice =
+                                    widget.grain.productPriceCalculator();
                               });
                             },
                           ),
@@ -211,7 +221,77 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                                 borderRadius: BorderRadius.circular(10.0)),
                             backgroundColor: Colors.grey),
                         onPressed: () {
-                       
+
+                          if (widget.cart.products.length == 0) {
+                            widget.cart.products.add(
+                              ProductItemCart(
+                                  productTitle: widget.grain.productTitle,
+                                  productAmount: widget.grain.productAmount,
+                                  productPrice: widget.grain.productPrice,
+                                  productDescription:
+                                      widget.grain.productDescription,
+                                  productImage: widget.grain.productImage,
+                                  isLiked: widget.grain.liked,
+                                  productSize: EnumToString.convertToString(
+                                      widget.grain.productWeight),
+                                  typeOfProduct: ProductType.GRANO),
+                            );
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Elemento agregado al carrito'),
+                                backgroundColor: Colors.orange,
+                              ),
+                            );
+                            Navigator.pushNamed(context, '/home');
+                          } else {
+                            // Si ya hay algo en el carrito,revisar que no exista el producto en el carrito por medio de su titulo y tamaño
+                            for (var i = 0;
+                                i < widget.cart.products.length;
+                                i++) {
+                              if (widget.cart.products[i].productTitle ==
+                                      widget.grain.productTitle &&
+                                  widget.cart.products[i].productSize ==
+                                      EnumToString.convertToString(
+                                          widget.grain.productWeight)) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Elemento ya en el carrito"),
+                                    backgroundColor: Colors.orange,
+                                  ),
+                                );
+                                break;
+                              }
+                              //Si el elemento no esta en el carrito se agrega
+                              else {
+                                widget.cart.products.add(
+                                  ProductItemCart(
+                                      productTitle: widget.grain.productTitle,
+                                      productAmount: widget.grain.productAmount,
+                                      productPrice: widget.grain.productPrice,
+                                      productDescription:
+                                          widget.grain.productDescription,
+                                      productImage: widget.grain.productImage,
+                                      isLiked: widget.grain.liked,
+                                      productSize: EnumToString.convertToString(
+                                          widget.grain.productWeight),
+                                      typeOfProduct: ProductType.BEBIDAS),
+                                );
+                                print(widget.cart.products);
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                        Text('Elemento agregado al carrito'),
+                                    backgroundColor: Colors.orange,
+                                  ),
+                                );
+                                break;
+                              }
+                            }
+                          }
+
+                          Navigator.pushNamed(context, '/home');
                         },
                         child: Text(
                           "AGREGAR AL CARRITO",
@@ -230,9 +310,7 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                               borderRadius: BorderRadius.circular(10.0)),
                           backgroundColor: Colors.grey,
                         ),
-                        onPressed: () {
-                         
-                        },
+                        onPressed: () {},
                         child: Text(
                           "COMPRAR AHORA",
                           style: TextStyle(color: Colors.black),

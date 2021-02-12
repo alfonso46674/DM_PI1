@@ -1,12 +1,15 @@
 import 'package:estructura_practica_1/grains/item_grains_details.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
 import 'package:flutter/material.dart';
 
 class ItemGrains extends StatefulWidget {
   final ProductGrains grain;
+  final ProductCart cart;
   ItemGrains({
     Key key,
     @required this.grain,
+    @required this.cart,
   }) : super(key: key);
 
   @override
@@ -98,10 +101,11 @@ class _ItemGrainsState extends State<ItemGrains> {
 
   void _openDetails() {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => ItemGrainsDetails(),
-      settings: RouteSettings(
-        arguments: widget.grain,
+      builder: (context) => ItemGrainsDetails(
+        grain: widget.grain,
+        cart: widget.cart
       ),
+     
     ));
   }
 }

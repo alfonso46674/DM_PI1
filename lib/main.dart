@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
             ),
         "/granos": (context) => GrainsPage(
               grainsList: grains,
+              cart: cart,
             ),
         "/postres": (context) => DessertsPage(
               dessertsList: desserts,
