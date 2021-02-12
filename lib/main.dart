@@ -1,6 +1,8 @@
 import 'package:estructura_practica_1/desserts/desserts_page.dart';
 import 'package:estructura_practica_1/drinks/hot_drinks_page.dart';
 import 'package:estructura_practica_1/grains/grains_page.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
+import 'package:estructura_practica_1/models/product_item_cart.dart';
 import 'package:estructura_practica_1/models/product_repository.dart';
 import 'package:estructura_practica_1/registro_y_login/login.dart';
 import 'package:estructura_practica_1/registro_y_login/registro.dart';
@@ -15,6 +17,12 @@ import 'home/home.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  final cart =
+      ProductCart(products: List<ProductItemCart>.empty(growable: true));
+  final hotDrinks = ProductRepository.loadProducts(ProductType.BEBIDAS);
+  final grains = ProductRepository.loadProducts(ProductType.GRANO);
+  final desserts = ProductRepository.loadProducts(ProductType.POSTRES);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -24,18 +32,27 @@ class MyApp extends StatelessWidget {
         primarySwatch: PRIMARY_COLOR,
         toggleableActiveColor: Colors.grey,
         buttonColor: Colors.grey,
-        
       ),
       initialRoute: '/',
       routes: {
         "/": (context) => Splash(),
-        "/home": (context) => Home(title: 'Inicio'),
+        "/home": (context) => Home(
+              title: 'Inicio',
+              cart: cart,
+            ),
         "/registroLogin": (context) => Registro_Login(),
         "/login": (context) => Login(),
         "/registro": (context) => Registro(),
-        "/bebidas": (context) => HotDrinksPage(drinksList: ProductRepository.loadProducts(ProductType.BEBIDAS)),
-        "/granos": (context) => GrainsPage(grainsList: ProductRepository.loadProducts(ProductType.GRANO)),
-        "/postres": (context) => DessertsPage(dessertsList: ProductRepository.loadProducts(ProductType.POSTRES)),
+        "/bebidas": (context) => HotDrinksPage(
+              drinksList: hotDrinks,
+              cart: cart,
+            ),
+        "/granos": (context) => GrainsPage(
+              grainsList: grains,
+            ),
+        "/postres": (context) => DessertsPage(
+              dessertsList: desserts,
+            ),
       },
     );
   }

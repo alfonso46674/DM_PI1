@@ -14,6 +14,7 @@ class DessertsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Postres"),
+        centerTitle: true,
       ),
       body: ListView.builder(
         itemCount: dessertsList.length,

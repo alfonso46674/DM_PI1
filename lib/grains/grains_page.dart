@@ -15,6 +15,7 @@ class GrainsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Café de grano"),
+        centerTitle: true,
       ),
       body: ListView.builder(
         itemCount: grainsList.length,

@@ -1,12 +1,15 @@
 import 'package:estructura_practica_1/drinks/item_hot_drinks_details.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/models/product_hot_drinks.dart';
 
 class ItemHotDrinks extends StatefulWidget {
   final ProductHotDrinks drink;
+  final ProductCart cart;
   ItemHotDrinks({
     Key key,
     @required this.drink,
+    @required this.cart,
   }) : super(key: key);
 
   @override
@@ -97,9 +100,9 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
 
   void _openDetails() {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => ItemHotDrinksDetails(),
-      settings: RouteSettings(
-        arguments: widget.drink,
+      builder: (context) => ItemHotDrinksDetails(
+        drink: widget.drink,
+        cart: widget.cart,
       ),
     ));
   }

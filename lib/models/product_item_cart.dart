@@ -5,6 +5,10 @@ class ProductItemCart {
   String productTitle;
   int productAmount;
   double productPrice;
+  String productImage;
+  String productDescription;
+  String productSize;
+  bool isLiked;
   final ProductType typeOfProduct;
 
   ProductItemCart({
@@ -12,5 +16,9 @@ class ProductItemCart {
     @required this.productTitle,
     @required this.productAmount,
     @required this.productPrice,
+    @required this.productImage,
+    @required this.productDescription,
+    @required this.productSize,
+    @required this.isLiked,
   });
 }
