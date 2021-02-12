@@ -12,7 +12,7 @@ const String PROFILE_SETTINGS = "Ajustes";
 const String PROFILE_NAME = "Anna Doe";
 const String PROFILE_EMAIL = "anna@doe.com";
 const String PROFILE_PICTURE =
-    "https://dkpp.go.id/wp-content/uploads/2018/10/photo.jpg";
+    "https://previews.123rf.com/images/racorn/racorn1308/racorn130805649/21341221-profile-portrait-of-a-charming-young-business-woman-being-happy-and-smiling-in-an-office-setting-.jpg";
 
 // app
 const MaterialColor PRIMARY_COLOR = const MaterialColor(
