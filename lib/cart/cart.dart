@@ -40,6 +40,8 @@ class _CartState extends State<Cart> {
                 return ItemCart(
                   onAmountUpdated: _priceUpdate,
                   product: widget.productsList[index],
+                  cart: widget.productsList,
+                  notifyParent: refresh,
                 );
               },
             ),
@@ -81,6 +83,17 @@ class _CartState extends State<Cart> {
         ],
       ),
     );
+  }
+
+  //funcion para que se refresque este padre en funcion del hijo -ItemCart-
+  //refresca el precio otra vez
+  refresh() {
+    setState(() {
+      _total = 0;
+      for(var i = 0; i < widget.productsList.length; i++){
+        _total += widget.productsList[i].productAmount * widget.productsList[i].productPrice;
+      }
+    });
   }
 
   void _priceUpdate(double newItemPrice) {

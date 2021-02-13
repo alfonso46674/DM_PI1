@@ -1,13 +1,22 @@
+import 'package:enum_to_string/enum_to_string.dart';
+import 'package:estructura_practica_1/models/product_item_cart.dart';
+import 'package:estructura_practica_1/models/product_repository.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class ItemCart extends StatefulWidget {
-  final dynamic product;
+  final ProductItemCart product;
   final ValueChanged<double> onAmountUpdated;
+  final List<ProductItemCart> cart;
+  
+  //funcion para que el hijo notifique al padre
+  final Function() notifyParent;
   ItemCart({
     Key key,
     @required this.onAmountUpdated,
     @required this.product,
+    @required this.cart,
+    @required this.notifyParent
   }) : super(key: key);
 
   @override
@@ -110,9 +119,25 @@ class _ItemCartState extends State<ItemCart> {
                     },
                   ),
                   SizedBox(height: 60),
-                  Icon(
-                    Icons.delete,
-                    color: PRIMARY_COLOR,
+                  IconButton(
+                    icon: Icon(
+                      Icons.delete,
+                      color: PRIMARY_COLOR,
+                    ),
+                    onPressed: () {
+                      setState(
+                        () {
+                          widget.cart.removeWhere((productCart) =>
+                              widget.product.productTitle ==
+                                  productCart.productTitle &&
+                              widget.product.productSize ==
+                                  productCart.productSize);
+
+                          //Notificar al padre que debe de refrescar su estado
+                          widget.notifyParent();
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
