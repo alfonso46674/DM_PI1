@@ -3,6 +3,7 @@ import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
 import 'package:estructura_practica_1/models/product_item_cart.dart';
 import 'package:estructura_practica_1/models/product_repository.dart';
+import 'package:estructura_practica_1/payment/payment_page.dart';
 import 'package:flutter/material.dart';
 
 class ItemGrainsDetails extends StatefulWidget {
@@ -317,7 +318,17 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                               borderRadius: BorderRadius.circular(10.0)),
                           backgroundColor: Colors.grey,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PaymentPage(),
+                              settings: RouteSettings(
+                                arguments: widget.grain.productTitle,
+                              ),
+                            ),
+                          );
+
+                        },
                         child: Text(
                           "COMPRAR AHORA",
                           style: TextStyle(color: Colors.black),

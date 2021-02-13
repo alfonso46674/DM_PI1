@@ -4,6 +4,7 @@ import 'package:estructura_practica_1/models/product_dessert.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
 import 'package:estructura_practica_1/models/product_item_cart.dart';
 import 'package:estructura_practica_1/models/product_repository.dart';
+import 'package:estructura_practica_1/payment/payment_page.dart';
 import 'package:flutter/material.dart';
 
 class ItemDessertsDetails extends StatefulWidget {
@@ -323,7 +324,16 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
                               borderRadius: BorderRadius.circular(10.0)),
                           backgroundColor: Colors.grey,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PaymentPage(),
+                              settings: RouteSettings(
+                                arguments: widget.dessert.productTitle,
+                              ),
+                            ),
+                          );
+                        },
                         child: Text(
                           "COMPRAR AHORA",
                           style: TextStyle(color: Colors.black),
