@@ -1,22 +1,23 @@
 import 'package:estructura_practica_1/desserts/item_desserts_details.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/models/product_dessert.dart';
 import 'package:flutter/material.dart';
 
 class ItemDesserts extends StatefulWidget {
   final ProductDesserts dessert;
-  ItemDesserts({Key key, @required this.dessert}) : super(key: key);
-
+  final ProductCart cart;
+  ItemDesserts({
+    Key key,
+    @required this.dessert,
+    @required this.cart,
+  }) : super(key: key);
 
   @override
   _ItemDessertsState createState() => _ItemDessertsState();
-
 }
 
-
 class _ItemDessertsState extends State<ItemDesserts> {
-  
   @override
-  
   Widget build(BuildContext context) {
     return Container(
       height: 200,
@@ -24,7 +25,7 @@ class _ItemDessertsState extends State<ItemDesserts> {
         children: [
           GestureDetector(
             onTap: _openDetails,
-                      child: Container(
+            child: Container(
               height: 160,
               margin: EdgeInsets.only(top: 20, bottom: 20, left: 24, right: 24),
               decoration: BoxDecoration(
@@ -97,11 +98,11 @@ class _ItemDessertsState extends State<ItemDesserts> {
     );
   }
 
-   void _openDetails() {
+  void _openDetails() {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => ItemDessertsDetails(),
-      settings: RouteSettings(
-        arguments: widget.dessert,
+      builder: (context) => ItemDessertsDetails(
+        dessert: widget.dessert,
+        cart: widget.cart,
       ),
     ));
   }

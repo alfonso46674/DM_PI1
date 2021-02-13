@@ -23,7 +23,7 @@ class ProductRepository {
         ProductDesserts(
           productTitle: "Crepas",
           productDescription: "Paquete de 3 crepas con crema y fresas.",
-          productImage: "https://lh3.googleusercontent.com/proxy/S3prWmo4GZo5WFTOmRNthappbkuspo10XLmuRH-yguLZtg0gBe3Ok1wWSE3KjPcDg9ZhZ0E41qSgxCKExxFZxWhDseZsf_ZTfjIQ0KLOaJRsaXFkL_KUUoiM0DyZ5buyvBBkDg",
+          productImage: "https://i1.wp.com/www.mamalatinatips.com/wp-content/uploads/2020/06/neapolitan-crepes-ice-crem-side-h-mlt-80.jpg?fit=1024%2C683&ssl=1",
           productSize: ProductSizeDessert.M,
           productAmount: 0,
         ),

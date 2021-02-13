@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
             ),
         "/postres": (context) => DessertsPage(
               dessertsList: desserts,
+              cart:cart,
             ),
       },
     );

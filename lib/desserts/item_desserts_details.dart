@@ -1,9 +1,19 @@
+import 'package:enum_to_string/enum_to_string.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/models/product_dessert.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
+import 'package:estructura_practica_1/models/product_item_cart.dart';
+import 'package:estructura_practica_1/models/product_repository.dart';
 import 'package:flutter/material.dart';
 
 class ItemDessertsDetails extends StatefulWidget {
-  ItemDessertsDetails({Key key}) : super(key: key);
+  final ProductDesserts dessert;
+  final ProductCart cart;
+  ItemDessertsDetails({
+    Key key,
+    @required this.cart,
+    @required this.dessert,
+  }) : super(key: key);
 
   @override
   _ItemDessertsDetailsState createState() => _ItemDessertsDetailsState();
@@ -14,20 +24,19 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
   bool isPressedLike = false;
 
 //Arreglo para los tamaños que se van a mostrar en los botones. Para tener una asociacion <int,string>
-  var _productSizesToShow = {0: "Chico", 1: "Mediano"};
+  var _productSizesToShow = {0: "Mediano", 1: "Chico"};
 
 //Arreglo de objetos que tendra la informacion de los botones. Se relaciona con el arreglo anterior
 //El key del arreglo anterior se usa para encontrar la posicion del boton a buscar en este areglo de objetos
   var _buttonList = [
-    {"id": 0, "name": "Chico", "state": false, "acronym": "CH"},
+    {"id": 0, "name": "Chico", "state": true, "acronym": "CH"},
     {"id": 1, "name": "Mediano", "state": false, "acronym": "M"},
   ];
   @override
   Widget build(BuildContext context) {
-    ProductDesserts dessert = ModalRoute.of(context).settings.arguments;
     return Scaffold(
         appBar: AppBar(
-          title: Text("${dessert.productTitle}"),
+          title: Text("${widget.dessert.productTitle}"),
           centerTitle: true,
         ),
         body: Padding(
@@ -55,17 +64,17 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
                           Align(
                             alignment: Alignment.topRight,
                             child: IconButton(
-                              icon: dessert.liked
+                              icon: widget.dessert.liked
                                   ? Icon(Icons.favorite)
                                   : Icon(Icons.favorite_border_outlined),
                               onPressed: () {
-                                dessert.liked = !dessert.liked;
+                                widget.dessert.liked = !widget.dessert.liked;
                                 setState(() {});
                               },
                             ),
                           ),
                           Image.network(
-                            "${dessert.productImage}",
+                            "${widget.dessert.productImage}",
                             width: 180,
                             height: 180,
                           ),
@@ -81,7 +90,7 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
               Row(
                 children: [
                   Text(
-                    "${dessert.productTitle}",
+                    "${widget.dessert.productTitle}",
                     style: TextStyle(
                         fontSize: 24.0, fontFamily: "Akzidens-Grotesk"),
                   ),
@@ -95,7 +104,7 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
                   Container(
                     child: Flexible(
                       child: Text(
-                        "${dessert.productDescription}",
+                        "${widget.dessert.productDescription}",
                         style:
                             TextStyle(fontSize: 20.0, fontFamily: 'OpenSans'),
                       ),
@@ -119,8 +128,7 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
                   ),
                   Container(
                     child: Text(
-                      "\$${dessert.productPrice}",
-
+                      "\$${widget.dessert.productPrice}",
                       style: TextStyle(fontSize: 28.0),
                     ),
                   ),
@@ -177,19 +185,19 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
                                 //Actualizar el tamaño del producto
                                 switch (_buttonList[buttonMap.key]["acronym"]) {
                                   case "Chico":
-                                    dessert.productSize = ProductSizeDessert.CH;
+                                    widget.dessert.productSize = ProductSizeDessert.CH;
                                     break;
 
                                   case "Mediano":
-                                    dessert.productSize = ProductSizeDessert.M;
+                                    widget.dessert.productSize = ProductSizeDessert.M;
                                     break;
 
                                   default:
                                 }
 
                                 //Actualizar precio en base del tamaño del producto
-                                dessert.productPrice = dessert.productPriceCalculator();
-
+                                widget.dessert.productPrice =
+                                    widget.dessert.productPriceCalculator();
                               });
                             },
                           ),
@@ -212,7 +220,91 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
                                 borderRadius: BorderRadius.circular(10.0)),
                             backgroundColor: Colors.grey),
                         onPressed: () {
-                       
+
+                           if (widget.cart.products.length == 0) {
+                            widget.cart.products.add(
+                              ProductItemCart(
+                                  productTitle: widget.dessert.productTitle,
+                                  productAmount: widget.dessert.productAmount,
+                                  productPrice: widget.dessert.productPrice,
+                                  productDescription:
+                                      widget.dessert.productDescription,
+                                  productImage: widget.dessert.productImage,
+                                  isLiked: widget.dessert.liked,
+                                  productSize: EnumToString.convertToString(
+                                      widget.dessert.productSize),
+                                  typeOfProduct: ProductType.POSTRES),
+                            );
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Elemento agregado al carrito'),
+                                backgroundColor: Colors.orange,
+                              ),
+                            );
+                            Navigator.pushNamed(context, '/home');
+
+
+                          } else {
+                            // Si ya hay algo en el carrito,revisar que no exista el producto en el carrito por medio de su titulo y tamaño
+                            var found = 0; 
+                            for (var i = 0;
+                                i < widget.cart.products.length;
+                                i++) {
+                                  print("i ${i}");
+                                  print("widget.cart.products[i].productTitle ${widget.cart.products[i].productTitle}" "// widget.dessert.productTitle ${widget.dessert.productTitle}");
+                                  var enumResult = EnumToString.convertToString(widget.dessert.productSize);
+                                  print("widget.cart.products[i].productSize ${widget.cart.products[i].productSize} // EnumToString.convertToString(widget.dessert.productSize) ${enumResult}" );                                   
+                              if (widget.cart.products[i].productTitle ==
+                                      widget.dessert.productTitle &&
+                                  widget.cart.products[i].productSize ==
+                                      EnumToString.convertToString(
+                                          widget.dessert.productSize)) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Elemento ya en el carrito"),
+                                    backgroundColor: Colors.orange,
+                                  ),
+                                );
+                                found = 1;
+                              }
+                             
+                            }
+
+                            //Si el elemento no esta en el carrito se agrega
+                            if(found == 0){
+                               
+                              
+                                widget.cart.products.add(
+                                  ProductItemCart(
+                                      productTitle: widget.dessert.productTitle,
+                                      productAmount: widget.dessert.productAmount,
+                                      productPrice: widget.dessert.productPrice,
+                                      productDescription:
+                                          widget.dessert.productDescription,
+                                      productImage: widget.dessert.productImage,
+                                      isLiked: widget.dessert.liked,
+                                      productSize: EnumToString.convertToString(
+                                          widget.dessert.productSize),
+                                      typeOfProduct: ProductType.POSTRES),
+                                );
+                                // print(widget.cart.products);
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                        Text('Elemento agregado al carrito'),
+                                    backgroundColor: Colors.orange,
+                                  ),
+                                );
+                            }
+
+
+                          }
+
+                          Navigator.pushNamed(context, '/home');
+
+
                         },
                         child: Text(
                           "AGREGAR AL CARRITO",
@@ -231,9 +323,7 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
                               borderRadius: BorderRadius.circular(10.0)),
                           backgroundColor: Colors.grey,
                         ),
-                        onPressed: () {
-                         
-                        },
+                        onPressed: () {},
                         child: Text(
                           "COMPRAR AHORA",
                           style: TextStyle(color: Colors.black),
