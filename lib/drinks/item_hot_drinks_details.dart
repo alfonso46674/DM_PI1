@@ -26,13 +26,13 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
   bool isPressedLike = false;
 
 //Arreglo para los tamaños que se van a mostrar en los botones. Para tener una asociacion <int,string>
-  var _productSizesToShow = {0: "Chico", 1: "Mediano", 2: "Grande"};
+  var _productSizesToShow = {0: "Mediano", 1: "Chico", 2: "Grande"};
 
 //Arreglo de objetos que tendra la informacion de los botones. Se relaciona con el arreglo anterior
 //El key del arreglo anterior se usa para encontrar la posicion del boton a buscar en este areglo de objetos
   var _buttonList = [
-    {"id": 0, "name": "Chico", "state": true, "acronym": "CH"},
-    {"id": 1, "name": "Mediano", "state": false, "acronym": "M"},
+    {"id": 0, "name": "Mediano", "state": true, "acronym": "M"},
+    {"id": 1, "name": "Chico", "state": false, "acronym": "CH"},
     {"id": 2, "name": "Grande", "state": false, "acronym": "G"},
   ];
   @override
@@ -231,7 +231,6 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                                 borderRadius: BorderRadius.circular(10.0)),
                             backgroundColor: Colors.grey),
                         onPressed: () {
-                          print(widget.cart.products);
 
                           //Si no hay nada en el carrito, meter lo primero que meta el cliente
                           if (widget.cart.products.length == 0) {
@@ -260,9 +259,16 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                             
                           } else {
                             // Si ya hay algo en el carrito,revisar que no exista el producto en el carrito por medio de su titulo y tamaño
+                            var found = 0;
                             for (var i = 0;
                                 i < widget.cart.products.length;
                                 i++) {
+
+                                                                        print("i ${i}");
+                                  print("widget.cart.products[i].productTitle ${widget.cart.products[i].productTitle}" "// widget.drink.productTitle ${widget.drink.productTitle}");
+                                  var enumResult = EnumToString.convertToString(widget.drink.productSize);
+                                  print("widget.cart.products[i].productSize ${widget.cart.products[i].productSize} // EnumToString.convertToString(widget.drink.productSize) ${enumResult}" );                                   
+
                               if (widget.cart.products[i].productTitle ==
                                       widget.drink.productTitle &&
                                   widget.cart.products[i].productSize ==
@@ -274,10 +280,12 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                                     backgroundColor: Colors.orange,
                                   ),
                                 );
-                                break;
+                                found = 1;
                               }
-                              //Si el elemento no esta en el carrito se agrega
-                              else {
+                            }
+
+                             //Si el elemento no esta en el carrito se agrega
+                             if(found == 0) {
                                 widget.cart.products.add(
                                   ProductItemCart(
                                       productTitle: widget.drink.productTitle,
@@ -291,7 +299,6 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                                           widget.drink.productSize),
                                       typeOfProduct: ProductType.BEBIDAS),
                                 );
-                                print(widget.cart.products);
 
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -300,9 +307,8 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                                     backgroundColor: Colors.orange,
                                   ),
                                 );
-                                break;
+                                
                               }
-                            }
                           }
 
                           Navigator.pushNamed(context, '/home');

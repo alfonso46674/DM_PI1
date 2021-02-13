@@ -28,8 +28,8 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
 //Arreglo de objetos que tendra la informacion de los botones. Se relaciona con el arreglo anterior
 //El key del arreglo anterior se usa para encontrar la posicion del boton a buscar en este areglo de objetos
   var _buttonList = [
-    {"id": 0, "name": "CUARTO", "state": true, "acronym": "CUARTO"},
-    {"id": 1, "name": "KILO", "state": false, "acronym": "KILO"},
+    {"id": 0, "name": "KILO", "state": true, "acronym": "KILO"},
+    {"id": 1, "name": "CUARTO", "state": false, "acronym": "CUARTO"},
   ];
   @override
   Widget build(BuildContext context) {
@@ -244,11 +244,18 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                               ),
                             );
                             Navigator.pushNamed(context, '/home');
+
                           } else {
                             // Si ya hay algo en el carrito,revisar que no exista el producto en el carrito por medio de su titulo y tamaño
+                            var found = 0; 
                             for (var i = 0;
                                 i < widget.cart.products.length;
                                 i++) {
+                                      print("i ${i}");
+                                  print("widget.cart.products[i].productTitle ${widget.cart.products[i].productTitle}" "// widget.grain.productTitle ${widget.grain.productTitle}");
+                                  var enumResult = EnumToString.convertToString(widget.grain.productWeight);
+                                  print("widget.cart.products[i].productSize ${widget.cart.products[i].productSize} // EnumToString.convertToString(widget.grain.productSize) ${enumResult}" );                                   
+                              
                               if (widget.cart.products[i].productTitle ==
                                       widget.grain.productTitle &&
                                   widget.cart.products[i].productSize ==
@@ -260,10 +267,11 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                                     backgroundColor: Colors.orange,
                                   ),
                                 );
-                                break;
+                                found = 1;
                               }
-                              //Si el elemento no esta en el carrito se agrega
-                              else {
+                           }
+                           //Si el elemento no esta en el carrito se agrega
+                              if(found == 0) {
                                 widget.cart.products.add(
                                   ProductItemCart(
                                       productTitle: widget.grain.productTitle,
@@ -277,7 +285,7 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                                           widget.grain.productWeight),
                                       typeOfProduct: ProductType.BEBIDAS),
                                 );
-                                print(widget.cart.products);
+                                // print(widget.cart.products);
 
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -286,9 +294,8 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                                     backgroundColor: Colors.orange,
                                   ),
                                 );
-                                break;
+                                
                               }
-                            }
                           }
 
                           Navigator.pushNamed(context, '/home');
