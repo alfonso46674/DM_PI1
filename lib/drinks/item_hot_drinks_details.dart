@@ -236,7 +236,7 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                             widget.cart.products.add(
                               ProductItemCart(
                                   productTitle: widget.drink.productTitle,
-                                  productAmount: widget.drink.productAmount,
+                                  productAmount: widget.drink.productAmount + 1,
                                   productPrice: widget.drink.productPrice,
                                   productDescription:
                                       widget.drink.productDescription,
@@ -289,7 +289,7 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                               widget.cart.products.add(
                                 ProductItemCart(
                                     productTitle: widget.drink.productTitle,
-                                    productAmount: widget.drink.productAmount,
+                                    productAmount: widget.drink.productAmount + 1,
                                     productPrice: widget.drink.productPrice,
                                     productDescription:
                                         widget.drink.productDescription,

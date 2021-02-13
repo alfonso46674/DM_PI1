@@ -75,7 +75,7 @@ class _Registro_LoginState extends State<Registro_Login> {
                       child: Text(
                         "INGRESA",
                         style: TextStyle(
-                          fontWeight: FontWeight.w700,
+                          // fontWeight: FontWeight.w700,
                           fontFamily: 'Akzidens-Grotesk',
                         ),
                         textAlign: TextAlign.center,

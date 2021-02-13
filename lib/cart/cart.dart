@@ -27,7 +27,7 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lista de compras"),
+        title: Text('Lista de compras'),
         centerTitle: true,
       ),
       body: Stack(
@@ -46,7 +46,37 @@ class _CartState extends State<Cart> {
           ),
           Positioned(
             bottom: 0,
-            child: Text("Total: \$$_total"),
+            left: 60,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Total: \$$_total",
+                  style: TextStyle(fontSize: 20),
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  height: 50,
+                  width: 300,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: Color.fromARGB(255, 0xBC, 0xB0, 0xA1),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            side: BorderSide(
+                                color: Color.fromARGB(255, 0xBC, 0xB0, 0xA1)))),
+                    child: Text(
+                      'PAGAR',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/payment');
+                    },
+                  ),
+                ),
+                SizedBox(height: 20)
+              ],
+            ),
           ),
         ],
       ),

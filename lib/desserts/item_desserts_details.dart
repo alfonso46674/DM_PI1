@@ -226,7 +226,7 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
                             widget.cart.products.add(
                               ProductItemCart(
                                   productTitle: widget.dessert.productTitle,
-                                  productAmount: widget.dessert.productAmount,
+                                  productAmount: widget.dessert.productAmount + 1,
                                   productPrice: widget.dessert.productPrice,
                                   productDescription:
                                       widget.dessert.productDescription,
@@ -279,7 +279,7 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
                                 widget.cart.products.add(
                                   ProductItemCart(
                                       productTitle: widget.dessert.productTitle,
-                                      productAmount: widget.dessert.productAmount,
+                                      productAmount: widget.dessert.productAmount + 1,
                                       productPrice: widget.dessert.productPrice,
                                       productDescription:
                                           widget.dessert.productDescription,
