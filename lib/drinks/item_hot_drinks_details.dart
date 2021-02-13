@@ -5,6 +5,7 @@ import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/models/product_hot_drinks.dart';
 import 'package:estructura_practica_1/models/product_item_cart.dart';
 import 'package:estructura_practica_1/models/product_repository.dart';
+import 'package:estructura_practica_1/payment/payment_page.dart';
 import 'package:flutter/material.dart';
 
 class ItemHotDrinksDetails extends StatefulWidget {
@@ -37,7 +38,6 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
   ];
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
           title: Text("${widget.drink.productTitle}"),
@@ -231,7 +231,6 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                                 borderRadius: BorderRadius.circular(10.0)),
                             backgroundColor: Colors.grey),
                         onPressed: () {
-
                           //Si no hay nada en el carrito, meter lo primero que meta el cliente
                           if (widget.cart.products.length == 0) {
                             widget.cart.products.add(
@@ -255,19 +254,20 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                               ),
                             );
                             Navigator.pushNamed(context, '/home');
-
-                            
                           } else {
                             // Si ya hay algo en el carrito,revisar que no exista el producto en el carrito por medio de su titulo y tamaño
                             var found = 0;
                             for (var i = 0;
                                 i < widget.cart.products.length;
                                 i++) {
-
-                                                                        print("i ${i}");
-                                  print("widget.cart.products[i].productTitle ${widget.cart.products[i].productTitle}" "// widget.drink.productTitle ${widget.drink.productTitle}");
-                                  var enumResult = EnumToString.convertToString(widget.drink.productSize);
-                                  print("widget.cart.products[i].productSize ${widget.cart.products[i].productSize} // EnumToString.convertToString(widget.drink.productSize) ${enumResult}" );                                   
+                              print("i ${i}");
+                              print(
+                                  "widget.cart.products[i].productTitle ${widget.cart.products[i].productTitle}"
+                                  "// widget.drink.productTitle ${widget.drink.productTitle}");
+                              var enumResult = EnumToString.convertToString(
+                                  widget.drink.productSize);
+                              print(
+                                  "widget.cart.products[i].productSize ${widget.cart.products[i].productSize} // EnumToString.convertToString(widget.drink.productSize) ${enumResult}");
 
                               if (widget.cart.products[i].productTitle ==
                                       widget.drink.productTitle &&
@@ -284,31 +284,29 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                               }
                             }
 
-                             //Si el elemento no esta en el carrito se agrega
-                             if(found == 0) {
-                                widget.cart.products.add(
-                                  ProductItemCart(
-                                      productTitle: widget.drink.productTitle,
-                                      productAmount: widget.drink.productAmount,
-                                      productPrice: widget.drink.productPrice,
-                                      productDescription:
-                                          widget.drink.productDescription,
-                                      productImage: widget.drink.productImage,
-                                      isLiked: widget.drink.liked,
-                                      productSize: EnumToString.convertToString(
-                                          widget.drink.productSize),
-                                      typeOfProduct: ProductType.BEBIDAS),
-                                );
+                            //Si el elemento no esta en el carrito se agrega
+                            if (found == 0) {
+                              widget.cart.products.add(
+                                ProductItemCart(
+                                    productTitle: widget.drink.productTitle,
+                                    productAmount: widget.drink.productAmount,
+                                    productPrice: widget.drink.productPrice,
+                                    productDescription:
+                                        widget.drink.productDescription,
+                                    productImage: widget.drink.productImage,
+                                    isLiked: widget.drink.liked,
+                                    productSize: EnumToString.convertToString(
+                                        widget.drink.productSize),
+                                    typeOfProduct: ProductType.BEBIDAS),
+                              );
 
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content:
-                                        Text('Elemento agregado al carrito'),
-                                    backgroundColor: Colors.orange,
-                                  ),
-                                );
-                                
-                              }
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Elemento agregado al carrito'),
+                                  backgroundColor: Colors.orange,
+                                ),
+                              );
+                            }
                           }
 
                           Navigator.pushNamed(context, '/home');
@@ -330,7 +328,16 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                               borderRadius: BorderRadius.circular(10.0)),
                           backgroundColor: Colors.grey,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PaymentPage(),
+                              settings: RouteSettings(
+                                arguments: widget.drink.productTitle,
+                              ),
+                            ),
+                          );
+                        },
                         child: Text(
                           "COMPRAR AHORA",
                           style: TextStyle(color: Colors.black),
